@@ -33,7 +33,7 @@ class PagesController < ApplicationController
     if params[:magic_word] == "cats"
       redirect_to('/secrets')
     else
-      flash[:notice] = "Not a valid page!"
+      flash[:notice] = "Sorry, you're not allowed to see this!"
       redirect_to("/welcome")
     end
   end
