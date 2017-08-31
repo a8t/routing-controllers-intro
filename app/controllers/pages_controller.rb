@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
 
+  before_action :set_kitten_url, only: [:kitten, :kittens]
+
   def welcome
     @header = "welcome"
     render :welcome
@@ -17,9 +19,16 @@ class PagesController < ApplicationController
 
   def kitten
     @header = "Contest!"
-    size = params[:size]
-    @kitten_url = "http://lorempixel.com/#{size}/#{size}/cats"
     render :kitten
   end
 
+  def kittens
+    @header = "Five kittens!"
+    render :kittens
+  end
+
+  def set_kitten_url
+    size = params[:size]
+    @kitten_url = "http://lorempixel.com/#{size}/#{size}/cats"
+  end
 end
