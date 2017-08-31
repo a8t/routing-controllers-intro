@@ -4,31 +4,37 @@ class PagesController < ApplicationController
 
   def welcome
     @header = "welcome"
-    render :welcome
   end
 
   def about
     @header = "About!"
-    render :about
   end
 
   def contest
-    @header = "Contest!"
-    render :contest
-  end
-
-  def kitten
-    @header = "Contest!"
-    render :kitten
-  end
-
-  def kittens
-    @header = "Five kittens!"
-    render :kittens
+    flash[:notice] = "Sorry, the contest is over!"
+    redirect_to('/welcome')
   end
 
   def set_kitten_url
     size = params[:size]
     @kitten_url = "http://lorempixel.com/#{size}/#{size}/cats"
+  end
+
+  def kitten
+    @header = "Contest!"
+  end
+
+  def kittens
+    @header = "Five kittens!"
+  end
+
+  def secrets
+    @header = "Secret page!"
+    if params[:magic_word] == "cats"
+      redirect_to('/secrets')
+    else
+      flash[:notice] = "Not a valid page!"
+      redirect_to("/welcome")
+    end
   end
 end
